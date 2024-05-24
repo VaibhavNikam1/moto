@@ -75,7 +75,7 @@ export default async function Index() {
                 <div className="flex">
                     <Leftmenu />
                     <div className="w-full p-4">
-                        <TaskList initialData={data} />
+                        <TaskList initialData={data || []} />
                     </div>
                 </div>
             </div>
