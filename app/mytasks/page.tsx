@@ -31,21 +31,41 @@ export default async function Index() {
         .select('*')
         .eq('user_id', user_id);
 
-        const handleDelete = async (taskId) => {
-          const response = await fetch('/api/deleteTask', {
-              method: 'DELETE',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ taskId }),
-          });
+    //     const handleDelete = async (taskId) => {
+    //       const response = await fetch('/api/deleteTask', {
+    //           method: 'DELETE',
+    //           headers: {
+    //               'Content-Type': 'application/json',
+    //           },
+    //           body: JSON.stringify({ taskId }),
+    //       });
   
-          if (response.ok) {
-              // Refresh the page or update the state to reflect the deletion
-              window.location.reload();
-          } else {
-              console.error('Failed to delete the task');
-          }
+    //       if (response.ok) {
+    //           // Refresh the page or update the state to reflect the deletion
+    //           window.location.reload();
+    //       } else {
+    //           console.error('Failed to delete the task');
+    //       }
+    //   };
+    const handleDelete = async (taskId: string) => {
+        const response = await fetch('/api/deleteTask', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ taskId, user_id }),
+        });
+      
+        if (!response.ok) {
+          // Handle error
+          console.error('Failed to delete the task');
+          return;
+        }
+      
+        // Task deletion was successful
+         window.location.reload();
+
+        console.log('Task deleted successfully');
       };
 
       return (
