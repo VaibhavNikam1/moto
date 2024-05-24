@@ -53,14 +53,14 @@ export default async function Index() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {tasks.map((task) => (
-                                    <tr key={task.id}>
-                                        <td className='py-2'>{task.id}</td>
-                                        <td className='py-2'>{task.name}</td>
-                                        <td className='py-2'>{task.description}</td>
-                                        <td className='py-2'>{task.status}</td>
-                                    </tr>
-                                ))}
+                            {tasks && tasks.map((task) => (
+                                <tr key={task.id}>
+                                    <td className='py-2'>{task?.id}</td>
+                                    <td className='py-2'>{task?.name}</td>
+                                    <td className='py-2'>{task?.description}</td>
+                                    <td className='py-2'>{task?.status}</td>
+                                </tr>
+                            ))}
                             </tbody>
                         </table>
                     </div>

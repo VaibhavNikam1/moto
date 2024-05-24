@@ -17,7 +17,8 @@ export default async function Team({
       data: { session },
     } = await supabase.auth.getSession();
   
-  
+    const email = session?.user?.email ?? '';
+    const userId = session?.user?.id ?? '';
     const asTemp = async (formData: FormData) => {
       'use server';
   
@@ -52,7 +53,12 @@ export default async function Team({
 
       <div className="w-full px-8 sm:max-w-md mx-auto mt-4 border p-5">
       <div className="flex items-center gap-4 my-5">
-        Hey, {session.user.email}!
+        {/* Hey, {session.user.email}!  */}
+        {session ? (
+      <>Hey, {session.user.email}!</>
+    ) : (
+      <>Hey, guest!</>  // Fallback message when session is null
+    )}
       </div>
         <form
           className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground mb-4"
@@ -62,8 +68,8 @@ export default async function Team({
          <label className="text-md" htmlFor="team">
             Select your Team
          </label>
-        <input type="hidden" name="email" value={session.user.email}/>
-        <input type="hidden" name="user_id" value={session.user.id}/>
+        <input type="hidden" name="email" value={email}/>
+        <input type="hidden" name="user_id" value={userId}/>
 
          <select name="team" className="rounded-md px-4 py-2 bg-inherit border mb-6 bg-white text-black" required>
             <option selected disabled>Select Team</option>
